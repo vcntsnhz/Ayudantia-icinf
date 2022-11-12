@@ -1,0 +1,91 @@
+{
+    "products": {
+        "name":{
+            "type":"String",
+            "required":true,
+            "minLength": 1,
+            "maxLength": 100
+        },
+        "price": {
+            "type": "Number",
+            "required": true
+        },
+        "quantity": {
+            "type": "Number",
+            "required": true
+        },
+        "description": {
+            "type": "String",
+            "required": true,
+            "minLength": 1,
+            "maxLength": 100
+        },
+        "categories": {
+            "type": "Schema.ObjetId",
+            "ref": "Category",
+            "required": true
+        },
+        "status": {
+            "type": "Schema.ObjetId",
+            "ref": "Status"
+        }
+    },
+    "categories": {
+        "name":{
+            "type": "String",
+            "required": true,
+            "minLength": 1,
+            "maxLength": 100
+        }
+    },
+    "status": {
+        "name": {
+            "type": "String",
+            "required": true,
+            "minLength": 1,
+            "maxLength": 100,
+            "enum": [
+                "active",
+                "inactive"
+            ]
+        }
+    },
+    "user": {
+        "name": {
+            "type": "String",
+            "required": true,
+            "minLength": 1,
+            "maxLength": 100
+        },
+        "email": {
+            "type": "String",
+            "required": true,
+            "minLength": 1,
+            "maxLength": 100
+        },
+        "password": {
+            "type": "String",
+            "required": true,
+            "minLength": 1,
+            "maxLength": 100
+        },
+        "role": {
+            "type": "String",
+            "enum": [
+                "admin",
+                "user"
+            ],
+            "default": "user"
+        },
+        "cart": {
+            "type": "Schema.ObjetId",
+            "ref": "Cart"
+        }
+    },
+    "cart": {
+        "products": {
+            "type": ["Schema.ObjetId"],
+            "ref": "Product"
+        }
+    }
+}
