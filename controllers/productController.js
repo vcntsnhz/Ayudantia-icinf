@@ -16,7 +16,7 @@ const createProduct = (req,res) =>{
     })
 }
 
-const getProducts = (req,res) => {
+const getProducts = (req, res) => {
     Product.find({},(error,products)=> {
         console.log("products", products)
         console.log("error", error)
@@ -28,10 +28,23 @@ const getProducts = (req,res) => {
         }
         return res.status(200).send(products)
     })
+}
 
+const updateProduct = (req, res) => {
+    const { id } = req.params
+    Product.findByIdAndUpdate(id, req.body, (error,product) => {
+        if(error){
+            return res.status(400).send({ message: "No se pudo actualizar el producto" })
+        }
+        if(!product){
+            return res.status(404).send({ message: "No se encontro el producto" })
+        }
+        return res.status(200).send({ message: "Producto modificado"})
+    })
 }
 
 module.exports = {
     createProduct,
-    getProducts
+    getProducts,
+    updateProduct
 }
