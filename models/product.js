@@ -21,11 +21,11 @@ const productSchema = new Schema({
         minLenght: 1,
         maxLenght: 250
     },
-//    categories:{
-//        type: [Schema.ObjectId],
-//        ref: 'Category',
-//    },
+    category:{
+        type: [Schema.ObjectId],
+        ref: 'category',
+    },
 
 })
 
-module.exports = mongoose.model("Product", productSchema)
+module.exports = mongoose.model("product", productSchema)

@@ -6,22 +6,26 @@ const app = express();
 dotenv.config();
 
 const productRoutes = require('./routes/productRoutes');
+const categoryRoutes = require('./routes/categoryRoutes');
+const userRoutes = require('./routes/userRoutes');
+//const cartRoutes = require('./routes/cartRoutes');
+//const statusRoutes = require('./routes/statusRoutes');
+
 app.use(cors());
 app.use(express.json());
 app.options('*', cors());
 app.use('/api', productRoutes);
+app.use('/api', categoryRoutes);
+app.use('/api', userRoutes);
+//app.use('/api', cartRoutes);
+//app.use('/api', statusRoutes);
 
-const options = {
-    useNewUrlParser: true,
-    autoIndex: true,
-    keepAlive: true,
-    connectTimeoutMS: 10000,
-    socketTimeoutMS: 45000,
-    family: 4,
-    useUnifiedTopology: true
-}
+mongoose.set('useNewUrlParser', true);
+mongoose.set('useFindAndModify', false);
+mongoose.set('useCreateIndex', true);
+mongoose.set('useUnifiedTopology', true);
 
-mongoose.connect(process.env.DB,options,(error)=>{
+mongoose.connect(process.env.DB, (error)=>{
     if(error){
         console.log(error);
     } else {
